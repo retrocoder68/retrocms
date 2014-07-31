@@ -46,12 +46,12 @@ function find_template($template){
     $template_path = "${_SERVER['DOCUMENT_ROOT']}".setting("site-root")."template/$template.php";
     if(!file_exists($template_path)){
         /* If not return default template. */
-        $template_path = "${_SERVER['DOCUMENT_ROOT']}".setting("site-root")."retrocms/default-template/$template.php";
+        $template_path = "${_SERVER['DOCUMENT_ROOT']}".setting("site-root")."retrocms/default_template/$template.php";
         if(!file_exists($template_path)){
             /* Or 404 error page. */
             $template_path = "${_SERVER['DOCUMENT_ROOT']}".setting("site-root")."template/404.php";
             if(!file_exists($template_path)){
-                $template_path = "${_SERVER['DOCUMENT_ROOT']}".setting("site-root")."retrocms/default-template/404.php";
+                $template_path = "${_SERVER['DOCUMENT_ROOT']}".setting("site-root")."retrocms/default_template/404.php";
             }
         }
     }
