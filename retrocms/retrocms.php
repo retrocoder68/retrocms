@@ -87,7 +87,9 @@ if(isset($_GET['it'])){
 switch($actionid){
     case VIEW:
 	if(isset($item)){
-	    if($typeid == ARTICLE){$article = get_article($item);}
+	    if($typeid == ARTICLE){
+		$article = get_article($item);
+		}
 	    elseif($typeid == CATEGORY){/*$category = get_category($item);*/}
 	    elseif($typeid == TAG){/*$tag = get_tag($item);*/}
 	    elseif($typeid == USER){/*$user = get_user($item);*/}

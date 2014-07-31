@@ -303,10 +303,11 @@ function get_article($shortname_or_id){
     if(!isset($shortname_or_id) || $shortname_or_id == null) return false;
 
     if(is_numeric($shortname_or_id)){
-        return get_article_by_id($shortname_or_id);
+        $article = get_article_by_id($shortname_or_id);
     } else {
-        return get_article_by_name($shortname_or_id);
+        $article = get_article_by_name($shortname_or_id);
     }
+    return $article;
 }
 
 /**
