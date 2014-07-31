@@ -6,7 +6,7 @@
  * These constants are set at installation time.
  * Please see readme file for detailed installation instructions.
  * 
- * @author J.Karlsson <j.karlsson@retrocoder.se
+ * @author J.Karlsson <j.karlsson@retrocoder.se>
  * @copyright 2014 J.Karlsson. All rights reserved.
  *
  * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
@@ -41,6 +41,12 @@ $_SETTINGS['dbname'] = 'retrocms';
  */
 $_SETTINGS['db-table-prefix'] = 'ret_';
 
+/* The version of the RetroCMS database.
+ * This value is not used as of July 2014, but is added to prepare for
+ * future database upgrades.
+ */
+$_SETTINGS['db-version'] = '1';
+
 /******************************************************************************
  * SQL server user settings
  */
@@ -60,6 +66,15 @@ $_SETTINGS['dbpassword'] = 'password';
 /* Web site protocol. */
 $_SETTINGS['site-protocol'] = 'http://';
 
+/* Web site server name. */
+$_SETTINGS['site-server'] = 'www.your-site.com';
+
 /* Web site root location. */
-$_SETTINGS['site-root'] = 'www.your-site.com/';
+$_SETTINGS['site-root'] = '/';
+
+/******************************************************************************
+ * The RetroCMS security settings
+ */
+/* Password hashing effort. */
+$_SETTINGS['pwhash-cost'] = '12';
 ?>

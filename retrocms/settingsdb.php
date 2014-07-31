@@ -7,7 +7,7 @@
  * settingsdb.php should be included first of all in all internal php files,
  * since unauthorized access is checked in settingsdb.php.
  * 
- * @author J.Karlsson <j.karlsson@retrocoder.se
+ * @author J.Karlsson <j.karlsson@retrocoder.se>
  * @copyright 2014 J.Karlsson. All rights reserved.
  *
  * @license http://www.gnu.org/licenses/ GNU General Public License, version 3
