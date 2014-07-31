@@ -23,7 +23,7 @@
  */
 
 /* Include library files. */
-require("settingsdb.php");
+require_once("settingsdb.php");
 
 /**
  * Create connection to the RetroCMS databse.
