@@ -147,8 +147,8 @@ function get_typeid($type){
  * readable ascii letters.
  */
 function create_shortname($name){
-    $search =  [" ", "å", "ä", "ö"];
-    $replace = ["-", "a", "a", "o"];
+    $search =  array(" ", "å", "ä", "ö");
+    $replace = array("-", "a", "a", "o");
     $shortname = urlencode(str_replace($search, $replace, strtolower(substr(strip_tags($name), 0, 16))));
     return $shortname;
 }

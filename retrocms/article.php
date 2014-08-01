@@ -109,7 +109,7 @@ function delete_article_db(){
  * 
  */
 function new_article(){
-    $article = ["art_id" => "new","shortname" => "","title" => "Insert title of article","text" => "Insert article text","save_time" => "","status" => "draft"];
+    $article = array("art_id" => "new","shortname" => "","title" => "Insert title of article","text" => "Insert article text","save_time" => "","status" => "draft");
     return $article;
 }
 
