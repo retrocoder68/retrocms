@@ -448,8 +448,11 @@ function create_session($userid){
     if(!isset($userid)) return false;
     
     /* Create session. */
-    session_start();
     $session_id = session_id();
+    if(empty($session_id)) {
+        session_start();
+        $session_id = session_id();
+    }
 #    $db = open_db();
 
     # Prepare input data.
