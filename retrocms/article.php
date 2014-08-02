@@ -168,7 +168,6 @@ function add_article($title, $text, $status, $shortname, $save_time){
     }
 
     /* Execute query. */
-    echo "SQL = ${sql} <br>";
     if(!mysqli_query($db,$sql)) {
         echo "Error adding article: " . mysqli_error($db) . "<br>";
     }
