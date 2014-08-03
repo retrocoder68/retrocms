@@ -130,9 +130,9 @@ switch($actionid){
 		    $status = "published";
 		}
 		if($art_id == "new"){ /* Save new article */
-		    $art_id = @add_article($title, $text, $status);
+		    $art_id = add_article($title, $text, $status);
 		} else { /* Save existing article */
-		    @update_article($art_id, $title, $text, $status);
+		    update_article($art_id, $title, $text, $status);
 		}
 		$go = setting("site-protocol").setting("site-server").setting("site-root")."?ai=1&ti=1&it=$art_id";
 		header("location:$go");
