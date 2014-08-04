@@ -371,6 +371,8 @@ function get_user($userid){
  * False will be returned if user was not found or incorrect password.
  *
  * @todo SECURITY-ISSUE! Do not return password hash in the return array.
+ * @todo Make sure checking for a non existing user takes some time, just as
+ * it does if password is wrong. This is to make a brute-force attack harder.
  */
 function get_user_with_name($username, $password){
     # Check input parameters.
@@ -397,6 +399,7 @@ function get_user_with_name($username, $password){
         mysqli_free_result($q_res);
     } else {
         echo "Error selecting user: " . mysqli_error($db) . "<br>";
+//        sleep(1);
         $user = false;
     }
 
@@ -801,6 +804,7 @@ function user_login($username, $password){
         }
         return $session_id;
     } else {
+        write_log("security", "Login attempt with wrong username or password - ${username}:${password}");
         return false;
     }
 }

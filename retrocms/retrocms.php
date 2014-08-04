@@ -32,6 +32,7 @@
 /* Include library files. */
 define("retrocms", 1);
 require_once("settingsdb.php");
+require_once("logging.php");
 require_once("action.php");
 require_once("template.php");
 require_once("userdb.php");
