@@ -227,11 +227,11 @@ function update_article($art_id, $title, $text, $status ='draft', $shortname = n
     $text = mysqli_real_escape_string($db, $text);
     if($status != 'draft' && $status != 'published') $status = 'draft';
     if(!empty($shortname)) $shortname = mysqli_real_escape_string($db, strip_tags(substr($shortname, 0, 16)));
-    if(!is_null($savetime)) $savetime = mysqli_real_escape_string($db, substr($save_time, 0, 30));
+    if(!is_null($save_time)) $save_time = mysqli_real_escape_string($db, substr($save_time, 0, 30));
 
     /* Update query. */
     $table_name = setting('db-table-prefix') . "articles";
-    if(is_null($savetime)){
+    if(is_null($save_time)){
         if(empty($shortname)){
             $sql="update ${table_name} set title='${title}', text='${text}', status='${status}' where art_id='${art_id}';";
         } else {
