@@ -80,7 +80,7 @@ function close_db($db){
  *
  * @todo SECURITY_ISSUE! Change and test to $2y$ bcrypt due to vuln. in $2a$ version.
  */
-function hash_passwd($password, $cost){
+function hash_passwd($password, $cost = null){
     /* Check availability of the blowfish cipher. */
     if(!(defined("CRYPT_BLOWFISH") && CRYPT_BLOWFISH)){
         echo "CRYPT_BLOWFISH is not available<br>";
@@ -88,7 +88,7 @@ function hash_passwd($password, $cost){
     }
     
     /* Check input parameters. */
-    if(!isset($cost)){
+    if(empty($cost)){
         $cost = intval(setting("pwhash-cost"));
     }
 

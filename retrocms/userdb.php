@@ -163,11 +163,13 @@ function delete_userdb(){
  *
  * @param string $display_name
  * The name to be displayed on the website, e.g. like author of articles.
+ * This parameter can be left emtpy and will then default to the user name.
  *
  * @param string $user_email
  * The email address of the user. Max length 32 characters.
  * Be aware that no check of any kind us done to verify that this is a
  * valid email address.
+ * This is an optional parameter and defaults to an empty string.
  *
  * @return int|false
  * The user id of the new user or false if user could not be added.
@@ -175,10 +177,10 @@ function delete_userdb(){
  * @todo Get the user id of the new user by querying with user name
  * instead of using the auto_increment of the table.
  */
-function add_user($username, $password, $display_name, $user_email){
+function add_user($username, $password, $display_name = null, $user_email = ""){
     /* Check input parameters. */
-    if(!isset($username) || empty($username) || !isset($password) || empty($password))
-        return false;
+    if(empty($username) || empty($password)) return false;
+    if(empty($display_name)) $display_name = $username;
 
     /* Store user data. */
     $db = open_db();
@@ -244,12 +246,13 @@ function add_user($username, $password, $display_name, $user_email){
  * @todo Handle empty values properly, i.e. no change if no value is
  * supplied.
  */
-function update_user($userid, $username, $password, $display_name, $user_email){
+function update_user($userid, $username, $password, $display_name = null, $user_email = ""){
     /* Check input parameters. */
-    if(!isset($userid) || $userid < 1 ||
-       !isset($username) || empty($username) ||
-       !isset($password) || empty($password))
+    if(empty($userid) || !is_numeric($userid) || intval($userid) < 1 ||
+       empty($username) ||
+       empty($password))
         return false;
+    if(empty($display_name)) $display_name = $username;
     
     /* Update user data. */
     $db = open_db();
@@ -291,7 +294,7 @@ function update_user($userid, $username, $password, $display_name, $user_email){
  */
 function delete_user($userid){
     /*  Check input parameters. */
-    if(!isset($userid) || $userid < 1) return false;
+    if(empty($userid) || !is_numeric($userid) || intval($userid) < 1) return false;
 
     $db = open_db();
 
@@ -328,7 +331,7 @@ function delete_user($userid){
  */
 function get_user($userid){
     /* Check input parameters. */
-    if(!isset($userid)) return false;
+    if(empty($userid) || !is_numeric($userid) || intval($userid) < 1) return false;
 
     $db = open_db();
     
@@ -368,10 +371,12 @@ function get_user($userid){
  * False will be returned if user was not found or incorrect password.
  *
  * @todo SECURITY-ISSUE! Do not return password hash in the return array.
+ * @todo Make sure checking for a non existing user takes some time, just as
+ * it does if password is wrong. This is to make a brute-force attack harder.
  */
 function get_user_with_name($username, $password){
     # Check input parameters.
-    if(!isset($username) || empty($username) || !isset($password) || empty($password)) return false;
+    if(empty($username) || empty($password)) return false;
 
     $db = open_db();
 
@@ -394,6 +399,7 @@ function get_user_with_name($username, $password){
         mysqli_free_result($q_res);
     } else {
         echo "Error selecting user: " . mysqli_error($db) . "<br>";
+//        sleep(1);
         $user = false;
     }
 
@@ -445,11 +451,14 @@ function get_current_user2(){
  */
 function create_session($userid){
     /* Check input parameters. */
-    if(!isset($userid)) return false;
-    
+    if(empty($userid)) return false;
+
     /* Create session. */
-    session_start();
     $session_id = session_id();
+    if(empty($session_id)) {
+        session_start();
+        $session_id = session_id();
+    }
 #    $db = open_db();
 
     # Prepare input data.
@@ -637,7 +646,7 @@ function get_session_for_user($userid){
  */
 function add_auth_user($session_id, $userid, $ip_address){
     /* Check input parameters. */
-    if(!isset($userid)) return false;
+    if(empty($userid) || !is_numeric($userid) || intval($userid) < 1) return false;
 
     $db = open_db();
 
@@ -676,7 +685,7 @@ function add_auth_user($session_id, $userid, $ip_address){
  */
 function delete_auth_user($session_id){
     /* Check input parameters. */
-    if(!isset($session_id)) return false;
+    if(empty($session_id)) return false;
 
     $db = open_db();
 
@@ -712,7 +721,7 @@ function delete_auth_user($session_id){
  */
 function get_auth_user($session_id){
     /* Check input parameters. */
-    if(!isset($session_id)) return false;
+    if(empty($session_id)) return false;
 
     $db = open_db();
 
@@ -750,7 +759,7 @@ function get_auth_user($session_id){
  */
 function update_last_active($userid){
     /* Check input parameters. */
-    if($userid == null) return false;
+    if(empty($userid) || !is_numeric($userid) || intval($userid) < 1) return false;
 
     $db = open_db();
 
@@ -795,6 +804,7 @@ function user_login($username, $password){
         }
         return $session_id;
     } else {
+        write_log("security", "Login attempt with wrong username or password - ${username}:${password}");
         return false;
     }
 }
@@ -838,7 +848,7 @@ function user_authenticated(){
         $authenticated = ($_SERVER['REMOTE_ADDR'] == $auth_user['ip_address']);
         $expires = new DateTime();
         $expires->sub(new DateInterval("P15M")); // Subtract 15 minutes.
-        $authenticated = $authenticated && ($expires < new DateTime($auth_user['last_active']));
+        $authenticated &= $expires < new DateTime($auth_user['last_active']);
     };
 
     # Update last active time.

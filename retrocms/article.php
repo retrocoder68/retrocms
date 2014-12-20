@@ -109,7 +109,7 @@ function delete_article_db(){
  * 
  */
 function new_article(){
-    $article = ["art_id" => "new","shortname" => "","title" => "Insert title of article","text" => "Insert article text","save_time" => "","status" => "draft"];
+    $article = array("art_id" => "new","shortname" => "","title" => "Insert title of article","text" => "Insert article text","save_time" => "","status" => "draft");
     return $article;
 }
 
@@ -124,7 +124,7 @@ function new_article(){
  *
  * @param string $status
  * The status of the article, must be one of 'draft' or 'published'.
- * This parameter can be left empty and will the default to 'draft'.
+ * This parameter can be left empty and will then default to 'draft'.
  *
  * @param string $shortname
  * The shortname of the article. The short name can be used as identifier of
@@ -141,34 +141,35 @@ function new_article(){
  * @return string | false
  * Returns the shortname of the added article.
  * If the article could not be added false is returned.
+ *
+ * @todo: SECURITY_ISSUE! Strip html tags from article text, only leaving allowed tags.
+ * Specifically the script tag should be removed to prevent cross site scripting.
  */
-function add_article($title, $text, $status, $shortname, $save_time){
+function add_article($title, $text, $status = 'draft', $shortname = null, $save_time = null){
     /* Check input parameters. */
-    if(!isset($title) || !isset($text)) return false;
-    if(!isset($status) || ($status != 'draft' && $status != 'published')) $status = 'draft';
-    if(!isset($shortname)) $shortname = create_shortname($title); else $shortname = create_shortname($shortname);
+    if(empty($title) || empty($text)) return false;
+    if(empty($shortname)) $shortname = create_shortname($title); else $shortname = create_shortname($shortname);
 
     $db = open_db();
 
     /* Prepare input data. */
     $title = mysqli_real_escape_string($db, strip_tags(substr($title, 0, 32)));
     $text = mysqli_real_escape_string($db, $text);
-    $status = mysqli_real_escape_string($db, substr($status, 0, 16));
+    if($status != 'draft' && $status != 'published') $status = 'draft';
     $shortname = mysqli_real_escape_string($db, substr($shortname, 0, 16));
-    if(isset($save_time)) $save_time = mysqli_real_escape_string($db, substr($save_time, 0, 30));
+    if(!is_null($save_time)) $save_time = mysqli_real_escape_string($db, substr($save_time, 0, 30));
 
     /* Store query. */
     $table_name = setting('db-table-prefix') . "articles";
-    if(isset($save_time)){
-        $sql="insert into ${table_name}(shortname, title, text, status, save_time)
-            values('${shortname}', '${title}', '${text}', '${status}', '${save_time}')";
-    } else {
+    if(is_null($save_time)){
         $sql="insert into ${table_name}(shortname, title, text, status)
             values('${shortname}', '${title}', '${text}', '${status}')";
+    } else {
+        $sql="insert into ${table_name}(shortname, title, text, status, save_time)
+            values('${shortname}', '${title}', '${text}', '${status}', '${save_time}')";
     }
 
     /* Execute query. */
-    echo "SQL = ${sql} <br>";
     if(!mysqli_query($db,$sql)) {
         echo "Error adding article: " . mysqli_error($db) . "<br>";
     }
@@ -191,7 +192,7 @@ function add_article($title, $text, $status, $shortname, $save_time){
  *
  * @param string $status
  * The status of the article, must be one of 'draft' or 'published'.
- * This parameter can be left empty and will the default to 'draft'.
+ * This parameter can be left empty and will then default to 'draft'.
  *
  * @param string $shortname
  * The shortname of the article. The short name can be used as identifier of
@@ -210,10 +211,13 @@ function add_article($title, $text, $status, $shortname, $save_time){
  * @return boolean
  * Returns true if successful.
  * If the article could not be added false is returned.
+ * 
+ * @todo: SECURITY_ISSUE! Strip html tags from article text, only leaving allowed tags.
+ * Specifically the script tag should be removed to prevent cross site scripting.
  */
-function update_article($art_id, $title, $text, $status, $shortname, $save_time){
+function update_article($art_id, $title, $text, $status ='draft', $shortname = null, $save_time = null){
     /* Check input data. */
-    if(!isset($art_id) || !isset($title) || !isset($text)) return false;
+    if(empty($art_id) || empty($title) || empty($text)) return false;
 
     $db = open_db();
 
@@ -221,23 +225,23 @@ function update_article($art_id, $title, $text, $status, $shortname, $save_time)
     $art_id = intval($art_id);
     $title = mysqli_real_escape_string($db, strip_tags(substr($title, 0, 32)));
     $text = mysqli_real_escape_string($db, $text);
-    if(!isset($status) || ($status != 'draft' && $status != 'published')) $status = 'draft';
-    if(isset($shortname)) $shortname = mysqli_real_escape_string($db, strip_tags(substr($shortname, 0, 16)));
-    if(isset($savetime)) $savetime = mysqli_real_escape_string($db, $savetime);
+    if($status != 'draft' && $status != 'published') $status = 'draft';
+    if(!empty($shortname)) $shortname = mysqli_real_escape_string($db, strip_tags(substr($shortname, 0, 16)));
+    if(!is_null($save_time)) $save_time = mysqli_real_escape_string($db, substr($save_time, 0, 30));
 
     /* Update query. */
     $table_name = setting('db-table-prefix') . "articles";
-    if(isset($savetime)){
-        if(isset($shortname)){
-            $sql="update ${table_name} set shortname='${shortname}', title='${title}', text='${text}', save_time = '${save_time}', status='${status}' where art_id='${art_id}';";
+    if(is_null($save_time)){
+        if(empty($shortname)){
+            $sql="update ${table_name} set title='${title}', text='${text}', status='${status}' where art_id='${art_id}';";
         } else {
-            $sql="update ${table_name} set title='${title}', text='${text}', save_time = '${save_time}', status='${status}' where art_id='${art_id}';";
+            $sql="update ${table_name} set shortname='${shortname}', title='${title}', text='${text}', status='${status}' where art_id='${art_id}';";
         }
     } else {
-        if(isset($shortname)){
-            $sql="update ${table_name} set shortname='${shortname}', title='${title}', text='${text}', status='${status}' where art_id='${art_id}';";
+        if(empty($shortname)){
+            $sql="update ${table_name} set title='${title}', text='${text}', save_time = '${save_time}', status='${status}' where art_id='${art_id}';";
         } else {
-            $sql="update ${table_name} set title='${title}', text='${text}', status='${status}' where art_id='${art_id}';";
+            $sql="update ${table_name} set shortname='${shortname}', title='${title}', text='${text}', save_time = '${save_time}', status='${status}' where art_id='${art_id}';";
         }
     }
 

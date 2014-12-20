@@ -68,6 +68,8 @@ function find_template($template){
  * @param string
  * The name of the template. The file which is looked for has to be named
  * $template.php
+ *
+ * @todo Add optional parameter to let execution continue after this function.
  */
 function insert_template($template){
     require(find_template($template));
