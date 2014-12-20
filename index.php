@@ -75,7 +75,8 @@
                     <p>
                         Published: <?php echo $article['save_time']; ?>
                         <?php if($authenticated_user){?>
-                        <a href="?ai=<?php actionid("EDIT");?>&ti=<?php typeid("ARTICLE");?>&it=<?php echo $article['shortname'];?>">Edit</a>
+                            <a href="?ai=<?php actionid("EDIT");?>&ti=<?php typeid("ARTICLE");?>&it=<?php echo $article['shortname'];?>">Edit</a>
+                            <a href="?ai=<?php actionid("DELETE");?>&ti=<?php typeid("ARTICLE");?>&it=<?php echo $article['shortname'];?>">Delete</a>
                         <?php } ?>
                     </p>
                 </div> <!-- class="article" -->
