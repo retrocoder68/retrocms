@@ -144,6 +144,21 @@ switch($actionid){
 	}
         break;
     case DELETE:
+	if($authenticated_user){
+	    if(isset($item)){
+			if($typeid == ARTICLE){
+			    $article = get_article($item);
+//			    echo "Deleting article:".$article['shortname'];
+			    delete_article($article['shortname']);
+				$go = setting("site-protocol").setting("site-server").setting("site-root");
+				header("location:$go");
+			    die();
+			} elseif($typeid == CATEGORY){/*$category = get_category($item);*/}
+			elseif($typeid == TAG){/*$tag = get_tag($item);*/}
+			elseif($typeid == USER){/*$user = get_user($item);*/}
+			elseif($typeid == CONFIG){/*$config = get_config($item);*/}
+	    }
+	}
         break;
     case SEARCH:
 	break;
