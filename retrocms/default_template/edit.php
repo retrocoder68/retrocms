@@ -7,7 +7,7 @@
  The default edit page.
  
  Author: J.Karlsson <j.karlsson@retrocoder.se>
- Copyright: 2014 J.Karlsson. All rights reserved.
+ Copyright (C) 2016 J.Karlsson. All rights reserved.
 
  License:
  This program is free software: you can redistribute it and/or modify
@@ -24,36 +24,49 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------>
 <head><title>RetroCMS - edit</title>
-<link rel="stylesheet" type="text/css" href="retrocms/default_template/css/dark-x.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-<div id="main">
-    <div id="content">
+<div class="container">
+    <div class="row">
         <h1>RetroCMS</h1>
-        <div class="edit-box "id="article-edit">
-            <form class="edit" action="?ai=<?php actionid("ADD");?>&ti=<?php typeid("ARTICLE");?>" method="post">
+        <div class="col-lg-12">
+            <div class="well">
                 <h2>Edit article</h2>
-                <label id="title" for="title">title</label>
-                <input type="text" name="title" id="title" value="<?php echo $article['title'];?>">
-<!--                <label id="shortname" for="shortname">shortname</label>
-                <input type="text" name="shortname" id="shortname" value="<?php echo $article['shortname'];?>"> -->
-                <label id="text" for="text">text</label>
-                <textarea name="text" id="text"><?php echo $article['text'];?></textarea>
-<!--                <input type="text" name="text" id="text" value="<?php echo $article['text'];?>"> -->
-<!--                <label id="save time" for="save_time">save time</label>
-                <input type="text" name="save_time" id="save_time" value="<?php echo $article['save_time'];?>"> -->
-<!--                <label id="status" for="status">status</label>
-                <input type="text" name="status" id="status" value="<?php echo $article['status'];?>"> -->
-<!--                <input type="submit" id="submit" name="save" value="Save"> -->
-                <input type="submit" id="submit" name="publish" value="Publish">
-                <input type="hidden" name="art_id" value="<?php echo $article['art_id'];?>">
-            </form>
-        </div> <!-- id="article-edit" -->
+                <form action="?ai=<?php actionid("ADD");?>&ti=<?php typeid("ARTICLE");?>" method="post">
+                    <div class="form-group">
+                        <label for="title">title</label>
+                        <input type="text" class="form-control" name="title" id="title" value="<?php echo $article['title'];?>">
+                    </div>
+<!--                <div class="form-group">
+                        <label for="shortname">shortname</label>
+                        <input type="text" class="form-control" name="shortname" id="shortname" value="<?php echo $article['shortname'];?>">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="text">text</label>
+                        <textarea class="form-control" rows="5" name="text" id="text"><?php echo $article['text'];?></textarea>
+                    </div>
+<!--                <div class="form-group">
+                        <label id="save time" for="save_time">save time</label>
+                        <input type="text" class="form-control" name="save_time" id="save_time" value="<?php echo $article['save_time'];?>">
+                    </div> -->
+<!--                <div class="form-group">
+                        <label id="status" for="status">status</label>
+                        <input type="text" class="form-control" name="status" id="status" value="<?php echo $article['status'];?>">
+                    </div> -->
+<!--                <div class="form-group">
+                        <input type="submit" class="form-control" id="submit" name="save" value="Save">
+                        <input type="submit" class="form-control" id="button_save" name="status" value="Save">
+                    </div>  -->
+                    <div class="form-group">
+                        <input type="submit" name="publish" value="Publish">
+                    </div>
+                    <input type="hidden" name="art_id" value="<?php echo $article['art_id'];?>">
+                </form>
+            </div>
+        </div>
         <p><a href="<?php echo setting('site-protocol').setting('site-server').setting('site-root');?>">Back to start page.</a></p>
-    </div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<footer>
-    Copyright (C) 2014 J.Karlsson (j.karlsson@retrocoder.se)
-</footer>
+    </div>
+</div>
 </body>
 </html>

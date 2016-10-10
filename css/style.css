@@ -4,7 +4,7 @@
  * The style sheet used by the example site.
  *
  * Author: J.Karlsson <j.karlsson@retrocoder.se>
- * Copyright: 2014 J.Karlsson. All rights reserved.
+ * Copyright (C): 2016 J.Karlsson. All rights reserved.
  *
  * License:
  * This program is free software: you can redistribute it and/or modify
@@ -22,28 +22,11 @@
  */
 
 body {
-    background-color: grey;
-}
-
-#main {
-    background-color: lightgrey;
-    border-left: black solid 1px;
-    border-right: black solid 1px;
-    margin: 0 5% 0 5%;
-    padding: 1px;
-    min-height: 330px;
-}
-
-#content {
-    background-color: white;
-    border: black solid 1px;
-    margin: 2px 20% 2px 20%;
+    margin-top: 20px;
 }
 
 footer {
-    border: black solid 1px;
-    margin: 0 5% 0 5%;
-    background-color: white;
+    margin: 50px 0;
     text-align: center;
 }
 footer a {
@@ -55,122 +38,9 @@ h1 {
     text-align: center;
 }
 
-h2 {
-    margin: 2px;
-    margin-top: 18px;
-}
-
-p {
-    margin: 2px;
-    margin-bottom: 12px;
-}
-
-#topbar {
-    background-color: black;
-    color: white;
-    margin: 0 5% 0 5%;
-}
-#topbar a {
-    color: white;
-}
-
-#admin-menu {
-    text-align: right;
-}
-#admin-menu ul {
-/* Reset margin and padding. */
-    margin: 0;
-    padding: 0;
-
-    list-style: none;
-}
-#admin-menu li {
-    display: inline;
-    padding: 5px;
-}
-
-#sidebar {
-    background-color: white;
-    border: black solid 1px;
-    margin: 2px;
-    width: 19%;
-    float: left;
-}
-#sidebar p {
-    border: black solid 1px;
-    margin: 2px;
-}
-
-.login {
-    border: black solid 1px;
-    margin: 2px;
-}
-.login header {
-    margin: 5px;
-    font-weight: bold;
-}
-.login:before {
-    content: 'Login';
-    margin: 5px;
-    font-weight: bold;    
-}
-.login label {
-    display: block;
-    margin-top: 5px;
-    margin-left: 5px;
-    text-transform: capitalize;
-}
-.login label:after { content: ":" }
-
-.login input {
-    margin-left: 5px;
-}
-.login #submit {
-    display: block;
-}
-
-#admin-tasks {
-    border: black solid 1px;
-    margin: 2px;    
-}
-#admin-tasks:before {
-    display: block;
-    content: 'Tasks';
-    margin: 5px;
-    font-weight: bold;
-}
-#admin-tasks ul {
-/* Reset margin and padding. */
-    margin: 0;
-    padding: 0;
-
-    list-style: none;
-}
-#admin-tasks li {
-    padding: 1px;
-    padding-left: 5px;
-}
-
-#links {
-    border: black solid 1px;
-    margin: 2px;
-}
-#links:before {
-    display: block;
-    content: 'Articles';
-    margin: 5px;
-    font-weight: bold;
-}
-#links ul {
-/* Reset margin and padding. */
-    margin: 0;
-    padding: 0;
-
-    list-style: none;
-}
-#links li {
-    padding: 1px;
-    padding-left: 5px;
+code {
+    color: black;
+    background-color: #fff1a8;
 }
 
 .edit-box {

@@ -6,7 +6,7 @@
  The default login page.
  
  Author: J.Karlsson <j.karlsson@retrocoder.se>
- Copyright: 2014 J.Karlsson. All rights reserved.
+ Copyright (C) 2016 J.Karlsson. All rights reserved.
 
  License:
  This program is free software: you can redistribute it and/or modify
@@ -23,21 +23,26 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------>
 <head><title>RetroCMS - login</title>
-<link rel="stylesheet" type="text/css" href="retrocms/default_template/css/dark-x.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-<div id="main">
-    <div id="content">
-        <h1>Welcome to RetroCMS</h1>
-        <form class="login" action="index.php?ai=<?php actionid("LOGIN");?>" method="post">
-            <label id="user" for="user">user</label><input type="text" name="user" id="user">
-            <label id="password" for="password">password</label><input type="password" name="password" id="password">
-            <input type="submit" id="submit" value="login">
-        </form>
-    </div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<footer>
-    Copyright (C) 2014 J.Karlsson (j.karlsson@retrocoder.se)
-</footer>
+<div class="container">
+    <div class="row">
+        <h1>Login to RetroCMS</h1>
+        <div class="col-lg-6">
+            <div class="well">
+                <form action="index.php?ai=<?php actionid("LOGIN");?>" method="post">
+                    <div class="form-group">
+                        <label for="user">user</label><input type="text" class="form-control" name="user" id="user">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">password</label><input type="password" class="form-control" name="password" id="password">
+                    </div>
+                    <input type="submit" id="submit" value="login">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
