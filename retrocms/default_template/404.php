@@ -6,7 +6,7 @@
  The default page not found, 404 error, page.
  
  Author: J.Karlsson <j.karlsson@retrocoder.se>
- Copyright: 2014 J.Karlsson. All rights reserved.
+ Copyright (C) 2016 J.Karlsson. All rights reserved.
 
  License:
  This program is free software: you can redistribute it and/or modify
@@ -23,20 +23,16 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ------------------------------------------------------------------------------>
 <head><title>RetroCMS - page not found</title>
-<link rel="stylesheet" type="text/css" href="retrocms/default_template/css/dark-x.css">
 </head>
 <body>
-<div id="main">
-    <div id="content">
+<div>
+    <div>
         <h1>Error 404 - page not found.</h1>
         <h2>Oops, something went wrong.</h2>
         <p>We can not find the page you looked for. Check the URL and try again or
         return to the start page.</p>
         <p><a href="/">Back to start</a></p>
-    </div> <!-- id="content" -->
-</div> <!-- id="main" -->
-<footer>
-    Copyright (C) 2014 J.Karlsson (j.karlsson@retrocoder.se)
-</footer>
+    </div>
+</div>
 </body>
 </html>
