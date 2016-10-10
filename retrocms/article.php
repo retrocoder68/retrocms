@@ -334,7 +334,7 @@ function get_article_by_name($shortname){
     $db = open_db();
     
     /* Prepare input data. */
-    $shortname = mysqli_real_escape_string($db, substr($shortname, 0, 16));
+    $shortname = mysqli_real_escape_string($db, substr($shortname, 0, 255));
 
     /* Select query. */
     $table_name = setting('db-table-prefix') . "articles";
