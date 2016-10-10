@@ -846,9 +846,9 @@ function user_authenticated(){
     $authenticated = false;
     if($auth_user = get_auth_user($session_id)){
         $authenticated = ($_SERVER['REMOTE_ADDR'] == $auth_user['ip_address']);
-        $expires = new DateTime();
+        $expires = new DateTime('now', new DateTimeZone('UTC'));
         $expires->sub(new DateInterval("P15M")); // Subtract 15 minutes.
-        $authenticated &= $expires < new DateTime($auth_user['last_active']);
+        $authenticated &= $expires < new DateTime($auth_user['last_active'], new DateTimeZone('UTC'));
     };
 
     # Update last active time.
