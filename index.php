@@ -22,8 +22,8 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
------------------------------------------------------------------------------->  <meta charset="UTF-8">
- <head>
+------------------------------------------------------------------------------>  
+<head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,7 +60,7 @@
 <?php } ?>
 
 <div class="container">
-    <h1 class="page-header">retrocoder.se</h1>
+    <h1 class="page-header">Example site using RetroCMS</h1>
     <div class="col-md-2">
         <?php if(!$authenticated_user){ ?>
         <!-- Login Well -->
@@ -120,16 +120,6 @@
                     <a class="btn btn-primary" href="?ai=<?php actionid("DELETE");?>&ti=<?php typeid("ARTICLE");?>&it=<?php echo $article['shortname'];?>"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                     <?php } ?>
                     <p><?php echo $article['text']; ?></p>
-<<<<<<< HEAD
-=======
-                    <p>
-                        Published: <?php echo $article['save_time']; ?>
-                        <?php if($authenticated_user){?>
-                            <a href="?ai=<?php actionid("EDIT");?>&ti=<?php typeid("ARTICLE");?>&it=<?php echo $article['shortname'];?>">Edit</a>
-                            <a href="?ai=<?php actionid("DELETE");?>&ti=<?php typeid("ARTICLE");?>&it=<?php echo $article['shortname'];?>">Delete</a>
-                        <?php } ?>
-                    </p>
->>>>>>> 46e8a03cd0ee284aaadbd53c03db05f3996e67dc
                 </div> <!-- class="article" -->
             <?php } else {
                 foreach(get_article_list() as $article){?>
