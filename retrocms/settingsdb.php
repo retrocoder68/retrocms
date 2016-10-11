@@ -65,6 +65,52 @@ function unlock_settingsdb(){
 function store_setting($key, $value) {
     global $_SETTINGS;
     $_SETTINGS[$key] = $value;
+    $changed = false;
+    $settings_array = file("settings.php", FILE_IGNORE_NEW_LINES);
+    if($settings_array){
+        foreach($settings_array as $lineno => $row) {
+            if(strpos($row, $key)){
+                $settings_array[$lineno] = "\$_SETTINGS['$key'] = '$value';";
+                $changed = true;
+            }
+        }
+        if($changed){
+            $settings_file = fopen("settings.php", "w+");
+            if($settings_file){
+                foreach($settings_array as $row) {
+                    fwrite($settings_, $row."\r\n");
+                }
+            }
+        }
+    }
     return $value;
+}
+
+/**
+ * Save the settings database.
+ * Not implemented.
+ */
+function save_all_settings() {
+    global $_SETTINGS;
+    $changed = false;
+    $settings_array = file("settings.php", FILE_IGNORE_NEW_LINES);
+    if($settings_array){
+        foreach($settings_array as $lineno => $row) {
+            if(strpos($row, $key)){
+                $settings_array[$lineno] = "\$_SETTINGS['$key'] = '$value';";
+                $changed = true;
+            }
+        }
+        if($changed){
+            $settings_file = fopen("settings.php", "w+");
+            if($settings_file){
+                foreach($settings_array as $row) {
+                    echo $row."<br>\r\n";
+//                    fwrite($settings_, $row."\r\n");
+                }
+            }
+        }
+    }
+    return $changed;
 }
 ?>

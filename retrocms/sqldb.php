@@ -26,7 +26,35 @@
 require_once("settingsdb.php");
 
 /**
- * Create connection to the RetroCMS databse.
+ * Create the RetroCMS databse.
+ *
+ * @return true | false
+ * True if the RetroCMS database was created or false if unsuccessful.
+ */
+function create_db(){
+    $con = mysqli_connect(setting('dbserver'),setting('dbuser'),setting('dbpassword'));
+
+    /* Check connection. */
+    if(mysqli_connect_errno()) {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
+    /* Create database */
+    $db_name = setting('dbname');
+    $sql="CREATE DATABASE IF NOT EXISTS ${db_name} DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
+    if (mysqli_query($con,$sql)) {
+        echo "Database created successfully";
+    } else {
+        echo "Error creating database: " . mysqli_error($con);
+        return false;
+    }
+    mysqli_close($con);
+    return true;
+}
+
+
+/**
+ * Open a connection to the RetroCMS databse.
  *
  * @return connection | false
  * A connection to the RetroCMS database or false if unsuccessful.
@@ -39,13 +67,6 @@ function open_db(){
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
 
-    // Create database
-#    $sql="CREATE DATABASE my_db";
-#    if (mysqli_query($con,$sql)) {
-#        echo "Database my_db created successfully";
-#    } else {
-#        echo "Error creating database: " . mysqli_error($con);
-#    }
     return $con;
 }
 
