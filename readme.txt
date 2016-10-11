@@ -14,15 +14,20 @@ A registered user can login and write and edit articles.
 A public user and can only read articles.
 
 - Articles
-New articles can be written and existing articles edited.
+New articles can be written and existing articles can be edited or deleted.
 All articles are published as soon as they are saved.
+Deleted articles are removed from the database and cannot not be retreived.
+
+- Installation
+Installation script vith a step-by-step guide.
 
 - Cookies not used, except for registered users when logged in.
-- Javascript is not used at the moment but will in the future
-but it should be possible to use the site with javascript turned off.
+- Jquery is used and also bootstrap uses some javascript,
+  but it should be possible to use the site with javascript turned off.
+- Bootstrap is used for formating.
 - Using HTML5 and CSS3.
 
---- Fetures to be added (short term) ---
+--- Fetures to be added ---
 - List articles based on publication date and/or on category
 At the moment articles can not be given any category.
 - List articles based on tags.
@@ -32,11 +37,11 @@ An article can contain text and html links.
 Articles can also contain images
 Articles can also contain youtube videos which can be viewed directly on site.
 
-- Installation description and script should be included.
+--- Fetures to be added (long term) ---
+- Misc. features
 - Set and show a global message
 - Set site in maintenance mode, where a messsage is shown to all users and no content is available.
 
---- Fetures to be added (long term) ---
 - Site content can be backed  up manually
 - Backup can be setup to run regularly.
 - Recreate site content from backup.
@@ -60,20 +65,17 @@ Either download zip file or clone repository with git.
 To clone with git, create a new folder and open a command prompt,
 cd to the new folder and run the following command:
 git clone https://github.com/retrocoder68/retrocms.git
-1. Edit settings.php in the retrocms folder.
-1.1 The following values has to be set correctly.
+1. Open your web browser, go to your site and run install.php.
+2. The installation script will guide you through a few steps to fill
+in the values stored in settings.php and create the database and tables needed.
+2.1 The installation script will fill in the following values that 
+has to be set correctly.
 $_SETTINGS['dbserver']
 $_SETTINGS['dbname']
 $_SETTINGS['dbuser']
 $_SETTINGS['dbpassword']
 $_SETTINGS['site-server']
 
-The other values can mostly be left untouched.
-
-2. Edit the installation script install.php
-Edit the installation script to create a user.
-
-3. Open your web browser, go to your site and run install.php.
 Done!
 
 --- End
