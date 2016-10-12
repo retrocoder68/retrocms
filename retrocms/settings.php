@@ -28,13 +28,19 @@
 if(!defined('retrocms')) die("Unauthorized access.");
 
 /******************************************************************************
+ * RetroCMS status settings
+ */
+/* RetroCMS is installed or not. Set to true when installation has been done.*/
+$_SETTINGS['installed'] = 'false';
+
+/******************************************************************************
  * SQL Database settings
  */
 /* The MySQL server name. */
 $_SETTINGS['dbserver'] = 'localhost';
 
 /* The MySQL database to use. */
-$_SETTINGS['dbname'] = 'retrocms';
+$_SETTINGS['dbname'] = 'retrocoder';
 
 /* The prefix to be used for the db tables.
  * Allows for multiple installations of RetroCMS on the same server.
@@ -53,12 +59,12 @@ $_SETTINGS['db-version'] = '1';
 /* The MySQL user to be used by RetroCMS.
  * Do not use root!
  */
-$_SETTINGS['dbuser'] = 'retrocms-user';
+$_SETTINGS['dbuser'] = 'retrocoder';
 
 /* The MySQL password of the user above.
  * Do not forget to change to a good password!
  */
-$_SETTINGS['dbpassword'] = 'password';
+$_SETTINGS['dbpassword'] = 'qNci5#rVpX8!lGIz';
 
 /******************************************************************************
  * The RetroCMS site settings
@@ -67,7 +73,7 @@ $_SETTINGS['dbpassword'] = 'password';
 $_SETTINGS['site-protocol'] = 'http://';
 
 /* Web site server name. */
-$_SETTINGS['site-server'] = 'www.your-site.com';
+$_SETTINGS['site-server'] = 'retrocoder.se';
 
 /* Web site root location. */
 $_SETTINGS['site-root'] = '/';
@@ -76,5 +82,5 @@ $_SETTINGS['site-root'] = '/';
  * The RetroCMS security settings
  */
 /* Password hashing effort. */
-$_SETTINGS['pwhash-cost'] = '12';
+$_SETTINGS['pwhash-cost'] = '14';
 ?>
