@@ -36,13 +36,12 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-    <?php //print_r($_setup); ?>
 <div class="container">
     <div>
         <h1 class="page-header">Welcome to RetroCMS</h1>
         <h2>This guide will help you install RetroCMS on your webserver.</h2>
             <?php
-//                $_setup->get_step_data();
+                if(!setting("installed")){
                 switch($_setup->step) {
                     case 0: ?>
                         <div class="well">
@@ -163,6 +162,8 @@
                         </div>
             <?php       break;
                     case 5:
+                        $_setup->set("installed", "true");
+                        $_setup->save_all_settings();
                         if(isset($_setup->enable)) {
                             require "retrocms/html.php";
                             require("retrocms/article.php");
@@ -180,6 +181,23 @@
                         echo "Default:<br>";
                         break;
                 }
+            } else { ?>
+            <div class="well">
+                <h2>Already done!</h2>
+                <p>
+                    RetroCMS has already been installed.<br>
+                    To do a fresh install or update you have to login.
+                </p>
+                <p>
+                    <a href="<?php echo setting("site-protocol").setting("site-server").setting("site-root");?>" class="btn btn-primary" role="button">
+                        <span class="glyphicon glyphicon-chevron-left"></span> Back to start
+                    </a>
+                    <a href="<?php echo setting("site-protocol").setting("site-server").setting("site-root")."?ai=6";?>" class="btn btn-primary">
+                        Goto login page <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </p>
+            </div>
+    <?php   }
             ?>
     </div> <!-- id="content" -->
 </div> <!-- class="container" -->
