@@ -125,7 +125,7 @@ class Setup {
         if($settings_array){
             foreach((array) $this as $key => $value){
                 foreach($settings_array as $lineno => $row) {
-                    if(strpos($row, "\$_SETTINGS['$key']")){
+                    if(strpos($row, "\$_SETTINGS['$key']") === 0){
                         $settings_array[$lineno] = "\$_SETTINGS['$key'] = '$value';";
                         $changed = true;
                     }
