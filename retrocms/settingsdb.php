@@ -39,7 +39,10 @@ require_once("settings.php");
  */
 function setting($key) {
     global $_SETTINGS;
-    return $_SETTINGS[$key];
+    $value = $_SETTINGS[$key];
+    if($value == 'true') $value = true;
+    else if($value == 'false') $value = false;
+    return $value;
 }
 
 /**
